@@ -31,6 +31,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
+  SCKEY: ${{ secrets.SCKEY }}
   TZ: Asia/Shanghai
 
 jobs:
@@ -178,6 +179,12 @@ jobs:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
+
+    - name: WeChat notification
+      continue-on-error: true
+      if: env.SCKEY
+      run: |
+        [ steps.compile.outputs.status == 'success' ] && curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=🎉编译完成😋|| curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=❌编译失败😂
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
