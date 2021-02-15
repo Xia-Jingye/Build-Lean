@@ -184,7 +184,7 @@ jobs:
       continue-on-error: true
       if: env.SCKEY
       run: |
-        [ steps.compile.outputs.status == 'success' ] && curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=🎉编译完成😋|| curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=❌编译失败😂
+        [ steps.compile.outputs.status == 'success' ] && curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=🎉Lean's OpenWrt编译完成😋|| curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=❌Lean's OpenWrt编译失败😂
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
