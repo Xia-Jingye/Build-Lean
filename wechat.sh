@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 WECHAT_LOG="/tmp/wechat.log"
+SCKEY: ${{ secrets.SCKEY }}
 DOWNURL="$(cat release.txt)"
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
