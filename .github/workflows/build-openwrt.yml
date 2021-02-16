@@ -176,6 +176,8 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: WeChat notification
+      continue-on-error: true
+      if: env.SCKEY
       env:
         IFSUCCESS: ${{ steps.compile.outputs.status }}
       run: source wechat.sh
