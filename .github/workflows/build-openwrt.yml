@@ -181,8 +181,6 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: WeChat notification
-#     continue-on-error: true
-      if: env.SCKEY
       run: source wechat.sh
 
 #    - name: Delete workflow runs
