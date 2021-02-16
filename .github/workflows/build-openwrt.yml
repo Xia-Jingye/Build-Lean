@@ -184,8 +184,8 @@ jobs:
       continue-on-error: true
       if: env.SCKEY
       run: |
-        echo "DOWNURL="*下载地址:**CowTransfer:*\`${{ steps.cowtransfer.outputs.url }}\`*WeTransfer:*\`${{ steps.wetransfer.outputs.url }}\`"" >> $GITHUB_ENV
-        [ steps.compile.outputs.status == 'success' ] && curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译成功。" -d "&desp=${{ env.DOWNURL }}" || curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译失败。" -d "&desp=失败了哪还有下载地址。"
+#        echo "DOWNURL="*下载地址:**CowTransfer:*\`${{ steps.cowtransfer.outputs.url }}\`*WeTransfer:*\`${{ steps.wetransfer.outputs.url }}\`"" >> $GITHUB_ENV
+        [ steps.compile.outputs.status == 'success' ] && curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译成功。" -d "&desp=$(cat release.txt)" || curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译失败。" -d "&desp=失败了哪还有下载地址。"
 
 #    - name: Delete workflow runs
 #      uses: GitRML/delete-workflow-runs@main
