@@ -184,7 +184,13 @@ jobs:
     - name: WeChat notification
       continue-on-error: true
       if: env.SCKEY
+<<<<<<< HEAD
       run: source wechat.sh
+=======
+      run: |
+        [ steps.compile.outputs.status == 'success' ] && curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译成功。" -d "&desp=$(cat release.txt)" || curl -s "https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=Lean固件在${{ env.FILE_DATE }}编译失败。" -d "&desp=失败了哪还有下载地址。"
+
+>>>>>>> 12ed1ea6eeb0466ecd7d13f963cb311c0a4499d7
 #    - name: Delete workflow runs
 #      uses: GitRML/delete-workflow-runs@main
 #      with:
