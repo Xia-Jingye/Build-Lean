@@ -181,6 +181,7 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: WeChat notification
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: source wechat.sh
 
 #    - name: Delete workflow runs
