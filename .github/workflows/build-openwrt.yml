@@ -183,7 +183,7 @@ jobs:
     - name: WeChat notification
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       env: 
-        IFSUSS:${{ steps.compile.outputs.status }}
+        IFSUSS: ${{ steps.compile.outputs.status }}
       run: source wechat.sh
 
 #    - name: Delete workflow runs
