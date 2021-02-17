@@ -12,7 +12,7 @@ ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
 
 if [[ ${IFSUCCESS} == success ]]; then
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lienol固件编译成功。" -d "&desp=${DOWNURL}" >${WECHAT_LOG}
+    curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean固件编译成功。" -d "&desp=${DOWNURL}" >${WECHAT_LOG}
     WECHAT_STATUS=$(cat ${WECHAT_LOG} | jq -r .errmsg)
     if [[ ${WECHAT_STATUS} != success ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
@@ -22,7 +22,7 @@ if [[ ${IFSUCCESS} == success ]]; then
 fi
 if [[ ${IFSUCCESS} != success ]]; then
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lienol固件编译失败。" -d "&desp=失败了哪还有下载地址。" >${WECHAT_LOG}
+    curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean固件编译失败。" -d "&desp=失败了哪还有下载地址。" >${WECHAT_LOG}
     WECHAT_STATUS=$(cat ${WECHAT_LOG} | jq -r .errmsg)
     if [[ ${WECHAT_STATUS} != success ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
