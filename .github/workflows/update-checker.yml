@@ -14,6 +14,7 @@ name: Update Checker
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
+  SCKEY: ${{ secrets.SCKEY }}
 
 on:
   workflow_dispatch:
@@ -50,6 +51,18 @@ jobs:
       with:
         token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
         event-type: Source Code Update
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheHash.outputs.cache-hit != 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean固件编译开始"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheHash.outputs.cache-hit == 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=今日Lean源码没有更新"
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
