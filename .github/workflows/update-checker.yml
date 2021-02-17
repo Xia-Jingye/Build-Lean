@@ -95,7 +95,7 @@ jobs:
         echo ${{ steps.getleanHash.outputs.commitHash }} | tee .commitleanHash
 
     - name: Trigger build
-      if: steps.cacheleanHash.outputs.cache-hit != 'true' || steps.cachepasswallHash.outputs.cache-hit != 'true'
+      if: steps.cacheleanHash.outputs.cache-hit != 'true' || steps.cachepasswallHash.outputs.cache-hit != 'true' || steps.cachehelloworldHash.outputs.cache-hit != 'true'
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
