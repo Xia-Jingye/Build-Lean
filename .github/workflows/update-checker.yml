@@ -14,7 +14,12 @@ name: Update Checker
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
+  PASSWALL_REPO_URL: https://github.com/xiaorouji/openwrt-passwall
+  PASSWALL_REPO_BRANCH: main
+  HELLOWORLD_REPO_URL: https://github.com/fw876/helloworld
+  HELLOWORLD_REPO_BRANCH: master
   SCKEY: ${{ secrets.SCKEY }}
+  TZ: Asia/Shanghai
 
 on:
   workflow_dispatch:
@@ -27,42 +32,122 @@ jobs:
 
     steps:
 
-    - name: Get Commit Hash
-      id: getHash
+    - name: Set timezone
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: sudo timedatectl set-timezone "$TZ"
+
+    - name: Get Helloworld Commit Hash
+      id: gethelloworldHash
       run: |
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH .
+        git clone --depth 1 $HELLOWORLD_REPO_URL -b $HELLOWORLD_REPO_BRANCH .helloworld
+        cd .helloworld
         echo "::set-output name=commitHash::$(git rev-parse HEAD)"
 
-    - name: Compare Commit Hash
-      id: cacheHash
+    - name: Compare Helloworld Commit Hash
+      id: cachehelloworldHash
       uses: actions/cache@v2
       with:
-        path: .commitHash
-        key: HEAD-${{ steps.getHash.outputs.commitHash }}
+        path: .helloworld
+        key: HEAD-${{ steps.gethelloworldHash.outputs.commitHash }}
 
-    - name: Save New Commit Hash
-      if: steps.cacheHash.outputs.cache-hit != 'true'
+    - name: Save New Helloworld Commit Hash
+      if: steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
-        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
+        echo ${{ steps.gethelloworldHash.outputs.commitHash }} | tee .commithelloworldHash
+
+    - name: Get PassWall Commit Hash
+      id: getpasswallHash
+      run: |
+        git clone --depth 1 $PASSWALL_REPO_URL -b $PASSWALL_REPO_BRANCH .passwall
+        cd .passwall
+        echo "::set-output name=commitHash::$(git rev-parse HEAD)"
+
+    - name: Compare PassWall Commit Hash
+      id: cachepasswallHash
+      uses: actions/cache@v2
+      with:
+        path: .passwall
+        key: HEAD-${{ steps.getpasswallHash.outputs.commitHash }}
+
+    - name: Save New PassWall Commit Hash
+      if: steps.cachepasswallHash.outputs.cache-hit != 'true'
+      run: |
+        echo ${{ steps.getpasswallHash.outputs.commitHash }} | tee .commitpasswallHash
+
+    - name: Get Lean Commit Hash
+      id: getleanHash
+      run: |
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH .lean
+        cd .lean
+        echo "::set-output name=commitHash::$(git rev-parse HEAD)"
+
+    - name: Compare Lean Commit Hash
+      id: cacheleanHash
+      uses: actions/cache@v2
+      with:
+        path: .lean
+        key: HEAD-${{ steps.getleanHash.outputs.commitHash }}
+
+    - name: Save New Lean Commit Hash
+      if: steps.cacheleanHash.outputs.cache-hit != 'true'
+      run: |
+        echo ${{ steps.getleanHash.outputs.commitHash }} | tee .commitleanHash
 
     - name: Trigger build
-      if: steps.cacheHash.outputs.cache-hit != 'true'
+      if: steps.cacheleanHash.outputs.cache-hit != 'true' || steps.cachepasswallHash.outputs.cache-hit != 'true'
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
         event-type: Source Code Update
 
     - name: WeChat notification
-      if: env.SCKEY && steps.cacheHash.outputs.cache-hit != 'true'
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean固件编译开始"
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都有更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.SCKEY && steps.cacheHash.outputs.cache-hit == 'true'
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=今日Lean源码没有更新"
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Lean源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=PassWall和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+
+    - name: WeChat notification
+      if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      run: |
+        echo "Sending message to WeChat..."
+        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
