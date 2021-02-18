@@ -177,7 +177,7 @@ jobs:
 
     - name: WeChat notification
       continue-on-error: true
-      if: env.SCKEY
+      if: env.SCKEY && !cancelled()
       env:
         IFSUCCESS: ${{ steps.compile.outputs.status }}
       run: source wechat.sh
