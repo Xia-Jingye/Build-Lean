@@ -19,8 +19,7 @@ if [[ ${IFSUCCESS} == success ]]; then
     else
         echo -e "${INFO} WeChat message sent successfully!"
     fi
-fi
-if [[ ${IFSUCCESS} != success ]]; then
+else
     echo -e "${INFO} Sending message to WeChat..."
     curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean固件编译失败。" -d "&desp=失败了哪还有下载地址。" >${WECHAT_LOG}
     WECHAT_STATUS=$(cat ${WECHAT_LOG} | jq -r .errmsg)
