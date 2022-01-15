@@ -35,7 +35,7 @@ env:
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: true
-  SCKEY: ${{ secrets.SCKEY }}
+  PUSHPLUSTOKEN: ${{ secrets.PUSHPLUSTOKEN }}
   TZ: Asia/Shanghai
 
 jobs:
@@ -190,7 +190,7 @@ jobs:
 
     - name: WeChat notification
       continue-on-error: true
-      if: env.SCKEY && !cancelled()
+      if: env.PUSHPLUSTOKEN && !cancelled()
       env:
         IFSUCCESS: ${{ steps.compile.outputs.status }}
       run: source wechat.sh
