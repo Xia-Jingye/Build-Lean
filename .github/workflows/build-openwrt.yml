@@ -15,11 +15,11 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions'
+        description: 'SSH connection to Actions(only accept "true" or "false")'
         required: false
         default: 'false'
       usedefaultconfig:
-        description: 'Use default configuration'
+        description: 'Use default configuration(only accept "true" or "false")'
         required: false
         default: 'false'
 
