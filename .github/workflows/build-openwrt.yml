@@ -49,8 +49,7 @@ jobs:
     - name: WeChat notification
       continue-on-error: false
       if: env.PUSHPLUSTOKEN && !cancelled()
-      env:
-        run: source wechat.sh
+      run: source wechat.sh
 
     - name: Initialization environment
       env:
