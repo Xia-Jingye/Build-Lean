@@ -40,8 +40,8 @@ IFSUCCESS="success"
 
 if [[ ${IFSUCCESS} == success ]]; then
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"Lean固件编译成功", "content":"下载地址", "channel":"'"$CHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
-    PUSHPLUSSTATUS=$(echo ${WECHAT_LOG} | grep -q '"code":200')
+    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"Lean固件编译成功", "content":"$DOWNURL", "channel":"'"$CHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
+    PUSHPLUSSTATUS=$(cat ${WECHAT_LOG} | grep -q '"code":200')
     if [[ ${PUSHPLUSSTATUS} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
     else
@@ -49,8 +49,8 @@ if [[ ${IFSUCCESS} == success ]]; then
     fi
 else
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"Lean固件编译失败", "content":"下载地址", "channel":"'"$CHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
-    PUSHPLUSSTATUS=$(echo ${WECHAT_LOG} | grep -q '"code":200')
+    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"Lean固件编译失败", "content":"$DOWNURL", "channel":"'"$CHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
+    PUSHPLUSSTATUS=$(cat ${WECHAT_LOG} | grep -q '"code":200')
     if [[ ${PUSHPLUSSTATUS} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
     else
