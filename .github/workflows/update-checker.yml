@@ -175,15 +175,17 @@ jobs:
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
-    - name: success
+    - name: Message send success
       if: env.PUSHPLUSTOKEN && steps.status1.outputs.status == '0' || steps.status2.outputs.status == '0' || steps.status3.outputs.status == '0' || steps.status4.outputs.status == '0' || steps.status5.outputs.status == '0' || steps.status6.outputs.status == '0' || steps.status7.outputs.status == '0' || steps.status8.outputs.status == '0'
       run: |
-        echo "Sending message success"
+        INFO="[${Green_font_prefix}INFO${Font_color_suffix}]"
+        echo -e "${INFO} WeChat message sent successfully: $(echo ${pushplusstatus})"
 
-    - name: fail
+    - name: Message send fail
       if: env.PUSHPLUSTOKEN && steps.status1.outputs.status == '1' || steps.status2.outputs.status == '1' || steps.status3.outputs.status == '1' || steps.status4.outputs.status == '1' || steps.status5.outputs.status == '1' || steps.status6.outputs.status == '1' || steps.status7.outputs.status == '1' || steps.status8.outputs.status == '1'
       run: |
-        echo "Sending message fail"
+        ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
+        echo -e "${ERROR} WeChat message sending failed: $(echo ${pushplusstatus})"
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
