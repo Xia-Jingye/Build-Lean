@@ -12,10 +12,9 @@ ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
 TITLESUCCESS="固件编译成功"
 TITLEFAIL="固件编译失败"
 #CONTENT="${DOWNURL}"
-WEBHOOK="xiajingye"
 CHANNEL="cp"
-PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
-PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
+PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
+PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
 
 #if [[ ${IFSUCCESS} == success ]]; then
 #    echo -e "${INFO} Sending message to WeChat..."
