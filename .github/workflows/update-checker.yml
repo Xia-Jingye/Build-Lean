@@ -105,7 +105,7 @@ jobs:
         event-type: Source Code Update
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       id: status1
       run: |
         echo "Sending message to WeChat..."
@@ -114,7 +114,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都有更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       id: status2
       run: |
         echo "Sending message to WeChat..."
@@ -123,7 +123,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Lean源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       id: status3
       run: |
         echo "Sending message to WeChat..."
@@ -132,7 +132,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       id: status4
       run: |
         echo "Sending message to WeChat..."
@@ -141,7 +141,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       id: status5
       run: |
         echo "Sending message to WeChat..."
@@ -150,7 +150,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       id: status6
       run: |
         echo "Sending message to WeChat..."
@@ -159,7 +159,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       id: status7
       run: |
         echo "Sending message to WeChat..."
@@ -168,7 +168,7 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=PassWall和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
-      if: env.TOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
+      if: env.PUSHPLUSTOKEN && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       id: status8
       run: |
         echo "Sending message to WeChat..."
@@ -177,12 +177,12 @@ jobs:
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: success
-      if: env.TOKEN && steps.status1.outputs.status == '0' || steps.status2.outputs.status == '0' || steps.status3.outputs.status == '0' || steps.status4.outputs.status == '0' || steps.status5.outputs.status == '0' || steps.status6.outputs.status == '0' || steps.status7.outputs.status == '0' || steps.status8.outputs.status == '0'
+      if: steps.status1.outputs.status == '0' || steps.status2.outputs.status == '0' || steps.status3.outputs.status == '0' || steps.status4.outputs.status == '0' || steps.status5.outputs.status == '0' || steps.status6.outputs.status == '0' || steps.status7.outputs.status == '0' || steps.status8.outputs.status == '0'
       run: |
         echo "Sending message success"
 
     - name: fail
-      if: env.TOKEN && steps.status1.outputs.status == '1' || steps.status2.outputs.status == '1' || steps.status3.outputs.status == '1' || steps.status4.outputs.status == '1' || steps.status5.outputs.status == '1' || steps.status6.outputs.status == '1' || steps.status7.outputs.status == '1' || steps.status8.outputs.status == '1'
+      if: steps.status1.outputs.status == '1' || steps.status2.outputs.status == '1' || steps.status3.outputs.status == '1' || steps.status4.outputs.status == '1' || steps.status5.outputs.status == '1' || steps.status6.outputs.status == '1' || steps.status7.outputs.status == '1' || steps.status8.outputs.status == '1'
       run: |
         echo "Sending message fail"
 
