@@ -59,6 +59,13 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
+    - name: WeChat notification
+      continue-on-error: false
+      if: env.PUSHPLUSTOKEN && !cancelled()
+      env:
+        IFSUCCESS: ${{ steps.compile.outputs.status }}
+      run: source wechat.sh
+
     - name: Clone source code
       working-directory: /workdir
       run: |
