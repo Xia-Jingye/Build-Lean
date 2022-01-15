@@ -38,7 +38,7 @@ if [[ ${IFSUCCESS} == success ]]; then
     if [[ ${?} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
     else
-        echo -e "${INFO} WeChat message sent successfully!"
+        echo -e "${INFO} WeChat message sent successfully: $(cat ${WECHAT_LOG})"
     fi
 else
     echo -e "${INFO} Sending message to WeChat..."
@@ -47,6 +47,6 @@ else
     if [[ ${?} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
     else
-        echo -e "${INFO} WeChat message sent successfully!"
+        echo -e "${INFO} WeChat message sent successfully: $(cat ${WECHAT_LOG})"
     fi
 fi
