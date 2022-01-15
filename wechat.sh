@@ -15,8 +15,8 @@ TITLEFAIL="固件编译失败"
 #CONTENT="${DOWNURL}"
 CHANNEL="cp"
 IFSUCCESS="success"
-PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
-PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
+#PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
+#PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
 
 #if [[ ${IFSUCCESS} == success ]]; then
 #    echo -e "${INFO} Sending message to WeChat..."
@@ -40,7 +40,7 @@ PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "cont
 
 if [[ ${IFSUCCESS} == success ]]; then
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s -X POST -H "Content-Type: application/json" -d "${PUSHPLUSPOSTSUCCESS}" http://www.pushplus.plus/send >${WECHAT_LOG}
+    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$TOKEN"'", "title":"Lean固件编译成功", "content":"下载地址", "channel":"'"$CHANNEL"'", "webhook":"'"$WEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
     PUSHPLUSSTATUS=$(echo ${WECHAT_LOG} | grep -q '"code":200')
     if [[ ${PUSHPLUSSTATUS} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
@@ -49,7 +49,7 @@ if [[ ${IFSUCCESS} == success ]]; then
     fi
 else
     echo -e "${INFO} Sending message to WeChat..."
-    curl -s -X POST -H "Content-Type: application/json" -d "${PUSHPLUSPOSTFAIL}" http://www.pushplus.plus/send >${WECHAT_LOG}
+    curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$TOKEN"'", "title":"Lean固件编译失败", "content":"下载地址", "channel":"'"$CHANNEL"'", "webhook":"'"$WEBHOOK"'"}' http://www.pushplus.plus/send >${WECHAT_LOG}
     PUSHPLUSSTATUS=$(echo ${WECHAT_LOG} | grep -q '"code":200')
     if [[ ${PUSHPLUSSTATUS} != 0 ]]; then
         echo -e "${ERROR} WeChat message sending failed: $(cat ${WECHAT_LOG})"
