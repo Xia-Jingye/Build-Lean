@@ -19,6 +19,9 @@ env:
   HELLOWORLD_REPO_URL: https://github.com/fw876/helloworld
   HELLOWORLD_REPO_BRANCH: master
   SCKEY: ${{ secrets.SCKEY }}
+  TOKEN: a0fb7c9e4cc240a784bc5af9c377db51
+  WEBHOOK: xiajingye
+  CHANNEL: cp
   TZ: Asia/Shanghai
 
 on:
@@ -105,49 +108,57 @@ jobs:
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都有更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"所有源码都有更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都有更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Lean源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"只有Lean源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Lean源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"只有PassWall源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"只有Helloworld源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"Lean和PassWall源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit != 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"Lean和Helloworld源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit != 'true' && steps.cachehelloworldHash.outputs.cache-hit != 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=PassWall和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"PassWall和Helloworld源码更新，开始编译", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=PassWall和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: WeChat notification
       if: env.SCKEY && steps.cacheleanHash.outputs.cache-hit == 'true' && steps.cachepasswallHash.outputs.cache-hit == 'true' && steps.cachehelloworldHash.outputs.cache-hit == 'true'
       run: |
         echo "Sending message to WeChat..."
-        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
+        curl -s -X POST -H "Content-Type: application/json" -d "{"token":"'${TOKEN}'", "title":"GitHub Actions", "content":"所有源码都没有更新", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}" http://www.pushplus.plus/send
+#        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
