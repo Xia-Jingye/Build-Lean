@@ -37,6 +37,7 @@ env:
   UPLOAD_RELEASE: true
   PUSHPLUSTOKEN: ${{ secrets.PUSHPLUSTOKEN }}
   PUSHPLUSWEBHOOK: ${{ secrets.PUSHPLUSWEBHOOK }}
+  PUSHPLUSCHANNEL: cp
   TZ: Asia/Shanghai
 
 jobs:
