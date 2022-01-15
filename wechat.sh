@@ -9,14 +9,13 @@ Red_background_prefix="\033[41;37m"
 Font_color_suffix="\033[0m"
 INFO="[${Green_font_prefix}INFO${Font_color_suffix}]"
 ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
-TOKEN="a0fb7c9e4cc240a784bc5af9c377db51"
-WEBHOOK="xiajingye"
 TITLESUCCESS="固件编译成功"
 TITLEFAIL="固件编译失败"
 #CONTENT="${DOWNURL}"
+WEBHOOK="xiajingye"
 CHANNEL="cp"
-PUSHPLUSPOSTSUCCESS='{"token":"'${TOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
-PUSHPLUSPOSTFAIL='{"token":"'${TOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
+PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
+PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${WEBHOOK}'"}'
 
 #if [[ ${IFSUCCESS} == success ]]; then
 #    echo -e "${INFO} Sending message to WeChat..."
