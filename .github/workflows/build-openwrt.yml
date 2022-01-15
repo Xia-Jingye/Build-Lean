@@ -46,6 +46,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
+    - name: WeChat notification
+      continue-on-error: false
+      if: env.PUSHPLUSTOKEN && !cancelled()
+      env:
+        run: source wechat.sh
+
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -58,13 +64,6 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-
-    - name: WeChat notification
-      continue-on-error: false
-      if: env.PUSHPLUSTOKEN && !cancelled()
-      env:
-        IFSUCCESS: ${{ steps.compile.outputs.status }}
-      run: source wechat.sh
 
     - name: Clone source code
       working-directory: /workdir
