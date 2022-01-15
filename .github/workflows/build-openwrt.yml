@@ -36,6 +36,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: true
   PUSHPLUSTOKEN: ${{ secrets.PUSHPLUSTOKEN }}
+  PUSHPLUSWEBHOOK: ${{ secrets.PUSHPLUSWEBHOOK }}
   TZ: Asia/Shanghai
 
 jobs:
