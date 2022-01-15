@@ -13,6 +13,7 @@ TITLESUCCESS="固件编译成功"
 TITLEFAIL="固件编译失败"
 #CONTENT="${DOWNURL}"
 CHANNEL="cp"
+IFSUCCESS="success"
 PUSHPLUSPOSTSUCCESS='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLESUCCESS}'", "content":"'${DOWNURL}'", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
 PUSHPLUSPOSTFAIL='{"token":"'${PUSHPLUSTOKEN}'", "title":"'${TITLEFAIL}'", "content":"失败了哪还有下载地址。", "channel":"'${CHANNEL}'", "webhook":"'${PUSHPLUSWEBHOOK}'"}'
 
