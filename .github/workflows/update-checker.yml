@@ -19,8 +19,8 @@ env:
   HELLOWORLD_REPO_URL: https://github.com/fw876/helloworld
   HELLOWORLD_REPO_BRANCH: master
   SCKEY: ${{ secrets.SCKEY }}
-  TOKEN: a0fb7c9e4cc240a784bc5af9c377db51
-  WEBHOOK: xiajingye
+  TOKEN: ${{ secrets.PUSHPLUSTOKEN }}
+  WEBHOOK: ${{ secrets.PUSHPLUSWEBHOOK }}
   CHANNEL: cp
   TZ: Asia/Shanghai
 
