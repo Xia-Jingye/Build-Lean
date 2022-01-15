@@ -21,6 +21,7 @@ env:
   PUSHPLUSTOKEN: ${{ secrets.PUSHPLUSTOKEN }}
   PUSHPLUSWEBHOOK: ${{ secrets.PUSHPLUSWEBHOOK }}
   PUSHPLUSCHANNEL: cp
+  PUSHPLUSTITLE: SSRP+、Passwall、Lean检查更新
   TZ: Asia/Shanghai
 
 on:
@@ -108,7 +109,7 @@ jobs:
       id: status1
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"所有源码都有更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"所有源码都有更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都有更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -118,7 +119,7 @@ jobs:
       id: status2
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"只有Lean源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"只有Lean源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Lean源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -128,7 +129,7 @@ jobs:
       id: status3
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"只有PassWall源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"只有PassWall源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -138,7 +139,7 @@ jobs:
       id: status4
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"只有Helloworld源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"只有Helloworld源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=只有Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -148,7 +149,7 @@ jobs:
       id: status5
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"Lean和PassWall源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"Lean和PassWall源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和PassWall源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -158,7 +159,7 @@ jobs:
       id: status6
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"Lean和Helloworld源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"Lean和Helloworld源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=Lean和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -168,7 +169,7 @@ jobs:
       id: status7
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"PassWall和Helloworld源码更新，开始编译", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"PassWall和Helloworld源码更新，开始编译", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=PassWall和Helloworld源码更新，开始编译（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
@@ -178,7 +179,7 @@ jobs:
       id: status8
       run: |
         echo "Sending message to WeChat..."
-        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"$PUSHPLUSTOKEN"'", "title":"SSRP+、Passwall、Lean检查更新", "content":"所有源码都没有更新", "channel":"'"$PUSHPLUSCHANNEL"'", "webhook":"'"$PUSHPLUSWEBHOOK"'"}' http://www.pushplus.plus/send)
+        pushplusstatus=$(curl -s -X POST -H "Content-Type: application/json" -d '{"token":"'"${PUSHPLUSTOKEN}"'", "title":"'"${PUSHPLUSTITLE}"'", "content":"所有源码都没有更新", "channel":"'"${PUSHPLUSCHANNEL}"'", "webhook":"'"${PUSHPLUSWEBHOOK}"'"}' http://www.pushplus.plus/send)
         echo "::set-output name=status::$(echo ${pushplusstatus} | grep -q '"code":200')"
         echo ${pushplusstatus} | tee .pushplusstatus
 #        curl -s "https://sc.ftqq.com/${SCKEY}.send?text=所有源码都没有更新（Lean）" -d "&desp=*检查时间：*\`$(date "+%Y%m%d-%H%M%S")\`"
