@@ -179,7 +179,7 @@ jobs:
         Green_font_prefix="\033[32m"
         Font_color_suffix="\033[0m"
         INFO="[${Green_font_prefix}INFO${Font_color_suffix}]"
-        echo -e "${INFO} WeChat message sent successfully: $(cat .pushplusstatus | sed 's/,/\n/g' | grep "errmsg" | sed 's/:/\n/g' | sed '1d' | sed 's/"//g')"
+        echo -e "${INFO} WeChat message sent successfully: $(cat .pushplusstatus | sed 's/,/\n/g' | grep "msg" | sed 's/:/\n/g' | sed '1d' | sed 's/"//g')"
 
     - name: Message send fail
       if: env.PUSHPLUSTOKEN && steps.status1.outputs.status == '1' || steps.status2.outputs.status == '1' || steps.status3.outputs.status == '1' || steps.status4.outputs.status == '1' || steps.status5.outputs.status == '1' || steps.status6.outputs.status == '1' || steps.status7.outputs.status == '1' || steps.status8.outputs.status == '1'
@@ -187,7 +187,7 @@ jobs:
         Red_font_prefix="\033[31m"
         Font_color_suffix="\033[0m"
         ERROR="[${Red_font_prefix}ERROR${Font_color_suffix}]"
-        echo -e "${ERROR} WeChat message sending failed: $(cat .pushplusstatus | sed 's/,/\n/g' | grep "errmsg" | sed 's/:/\n/g' | sed '1d' | sed 's/"//g')"
+        echo -e "${ERROR} WeChat message sending failed: $(cat .pushplusstatus | sed 's/,/\n/g' | grep "msg" | sed 's/:/\n/g' | sed '1d' | sed 's/"//g')"
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
