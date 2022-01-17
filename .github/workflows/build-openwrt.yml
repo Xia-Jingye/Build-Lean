@@ -72,15 +72,17 @@ jobs:
       run: cd openwrt && ./scripts/feeds install -a
 
     - name: Use default configuration
+      id: usedefaultconfig
       if: (github.event.inputs.usedefaultconfig == 'true' && github.event.inputs.usedefaultconfig  != 'false') || contains(github.event.action, 'usedefaultconfig')
       run: |
         [ -e files ] && mv files openwrt/files
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        echo "::set-output name=status::success"
 
     - name: Use custom configuration
-      if: (github.event.inputs.usedefaultconfig == 'false' && github.event.inputs.usedefaultconfig  != 'true') || contains(github.event.action, 'usedefaultconfig')
+      if: steps.usedefaultconfig.outputs.status != 'success'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
