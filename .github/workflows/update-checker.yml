@@ -4,7 +4,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   PASSWALL_REPO_URL: https://github.com/xiaorouji/openwrt-passwall
-  PASSWALL_REPO_BRANCH: main
+  PASSWALL_REPO_BRANCH: packages
   HELLOWORLD_REPO_URL: https://github.com/fw876/helloworld
   HELLOWORLD_REPO_BRANCH: master
   PUSHPLUSTOKEN: ${{ secrets.PUSHPLUSTOKEN }}
